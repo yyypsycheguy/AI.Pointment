@@ -54,43 +54,32 @@ Output format is JSON:
 Valid actions:
 - "register_patient"
 - "get_doctor_id"
-- "get_availabilities"
 - "None" (if no action is required).
 
 EXAMPLES:
 - USER: "Can I have information on the availability of Dr. House?"
 - AI: {{
-        "action": "get_doctor_id",
+        "action": "get_doctor_id"
         }}
 
 - USER: "I think I have an appointment with Dr. Clark from the radiology department."
 - AI: {{
-        "action": "get_doctor_id",
+        "action": "get_doctor_id"
         }}
         
 - USER "I am a new patient, my name is John Doe, I was born on 1990-01-01, my phone number is 123-456-7890, and my email is js@gmail.com"
 - AI: {{
-        "action": "register_patient",
+        "action": "register_patient"
         }}
         
 - USER "Hello, how are you today?"
 - AI: {{
-        "action": "None",
-        }}
-        
-- USER "I am available on Monday and Wednesday, can I have an appointment with Dr. Clark from the radiology department?"
-- AI: {{
-        "action": "get_availabilities",
-        }}
-        
-- USER "I would like to meet a doctor who is available on Friday."
-- AI: {{
-        "action": "get_availabilities",
+        "action": "None"
         }}
         
 - USER "I want a blue car."
 - AI: {{
-        "action": "None",
+        "action": "None"
         }}
 
 Ensure all JSON fields are present and the JSON format is repspected.
@@ -133,6 +122,7 @@ EXAMPLES:
 }}
 
 Give the information in the json in the same order as the example, if you do not have the information, put null in the json.
+YOU MUST RESPECT THE FORMAT OF THE JSON AND OUTPUT A JSON OBJECT.
 """
 
 get_doctor_id_prompt = f"""
@@ -163,6 +153,7 @@ EXAMPLES:
         }}
 
 Give the information in the json in the same order as the example, if you do not have the information, put null in the json.
+YOU MUST RESPECT THE FORMAT OF THE JSON AND OUTPUT A JSON OBJECT.
 """
 
 get_availabilities_prompt = f"""
@@ -210,20 +201,22 @@ EXAMPLES:
         }}
 
 Give the information in the json in the same order as the example, if you do not have the information, put null in the json.
+YOU MUST RESPECT THE FORMAT OF THE JSON AND OUTPUT A JSON OBJECT.
 """
 
-
-
-
-
 # Utility functions
-def generate_response(question: str, prompt: str = BASE_PROMPT):
-    """
-    Generate a response using the AI model.
-    """
-    model = genai.GenerativeModel("gemini-pro")
+def generate_response(question: str, prompt: str = BASE_PROMPT, model_name = "gemini-pro"):
+    model = genai.GenerativeModel(model_name)
     response = model.generate_content([prompt, question])
-    return response.text
+    for _ in range(3): # Try 3 times to get a valid JSON response
+        try:
+            # Parse JSON to ensure the structure is valid
+            return json.loads(response.text)
+        except json.JSONDecodeError:
+            pass
+    print("Invalid JSON response from AI.")
+    print(response.text)
+    return {"action": "None"}
 
 def create_patient_json(first_name, last_name, dob, phone, email, address):
     """
@@ -269,15 +262,17 @@ def index():
     if request.method == "POST":
         user_input = request.form.get("user_input")
         ai_response = generate_response(user_input)
-        
+        with open("ai_response.json", "w") as f:
+            f.write(json.dumps(ai_response, indent=4))
         try:
-            response_json = json.loads(ai_response)
+            response_json = ai_response
             action = response_json.get("action", "None")
 
             if action == "register_patient":
                 # Register patient
                 ai_response = generate_response(user_input, register_patient_prompt)
-                response_json = json.loads(ai_response)
+                response_json = ai_response
+                
                 patient_data = create_patient_json(
                     response_json.get("first_name", "null"),
                     response_json.get("last_name", "null"),
@@ -290,12 +285,12 @@ def index():
             
             elif action == "get_doctor_id":
                 ai_response = generate_response(user_input, get_doctor_id_prompt)
-                response_json = json.loads(ai_response)
+                response_json = ai_response
                 # Get doctor ID
                 filters = {
                     "first_name": response_json.get("doctor_first_name", "null"),
                     "last_name": response_json.get("doctor_last_name", "null"),
-                    "specialty": response_json.get("specialty", "null")
+                    "specialty_id": response_json.get("specialty", "null")
                 }
                 result = fetch_doctor_id(filters)
             
