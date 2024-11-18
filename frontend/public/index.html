@@ -1,0 +1,15 @@
+<!-- html template for home page, single page app for now-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+    
+</body>
+</html>

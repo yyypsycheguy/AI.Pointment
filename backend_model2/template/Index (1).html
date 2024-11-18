@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Appointment Scheduler</title>
+</head>
+<body>
+    <h1>Chat with the AI Assistant</h1>
+    <form method="post">
+        <label for="user_input">Your message:</label><br>
+        <textarea name="user_input" rows="4" cols="50"></textarea><br><br>
+        <input type="submit" value="Send">
+    </form>
+    {% if user_input %}
+        <h2>Your input:</h2>
+        <p>{{ user_input }}</p>
+    {% endif %}
+    {% if ai_response %}
+        <h2>AI's response:</h2>
+        <pre>{{ ai_response }}</pre>
+    {% endif %}
+    {% if result %}
+        <h2>Database Result:</h2>
+        <p>{{ result }}</p>
+    {% endif %}
+    {% if error %}
+        <h2>Error:</h2>
+        <p>{{ error }}</p>
+    {% endif %}
+</body>
+</html>

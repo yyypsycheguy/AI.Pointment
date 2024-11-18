@@ -1,0 +1,447 @@
+/* static/styles.css */
+
+.home {
+    background-image: url('/public/background-green.png');
+    width: 100%;
+    height: 100%; /* Full viewport height */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Ensures full height for the root element */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden; /* Prevents horizontal scrollbars */
+}
+
+.flex-container{
+    display: flex;
+    flex-direction: row; /* aligns children items horizontally */
+}
+
+.left-item{
+    display: flex;
+    flex-direction: column;
+    width: 18vw;
+    height: 100%;
+    padding-left: 4vw;
+    padding-top: 5vh;
+    padding-right: 4vw;
+}
+
+/* Base styles */
+.white-box {
+    position: relative; /* Needed for pseudo-element positioning */
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    max-width: 1200px;
+    height: auto;
+    border-radius: 20px;
+    padding: 8%;
+    margin: 0 auto;
+    z-index: 1; /* Ensure content is above the pseudo-element */
+    background: none; /* Remove direct background */
+}
+
+.white-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90%;
+    height: 100%;
+    background: rgba(217, 217, 217, 0.8);
+    border-radius: 20px;
+    z-index: -1; /* Ensure the pseudo-element is behind the content */
+    opacity:0.6;
+}
+
+.white-box-text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 90%;
+    margin-top: 4%;
+    margin-bottom: 8%;
+}
+
+.BookUaPointem {
+    font-size: clamp(1.5rem, 2vw, 8rem); /* Dynamically scale font size */
+    color: #FFF;
+    font-family: Inter, sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    overflow-wrap: break-word;
+}
+
+.explanation {
+    margin-top: 4%;
+    font-size: clamp(0.8rem, 1vw, 2rem); /* Dynamically scale font size */
+    color: #FFF;
+    font-family: Inter, sans-serif;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.info-box{
+    display: flex;
+    border-radius: 20px;
+    background: rgba(39, 39, 39, 0.40);
+    width: 100%;
+    margin-top: 1vh;
+    flex-direction: column;
+}
+
+.info-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 5%;
+    margin-bottom: 4%;
+    margin-left: 10%;
+}
+
+.svg{
+    stroke-width: 1.5px;
+    stroke: #FFF;
+    margin-right: 4%;
+    width: 5%;
+}
+
+.info{
+    display:flex;
+    width:100%;
+    color: #FFF;
+    font-family: Arial;
+    font-size: clamp(0.5rem, 1vw, 1rem);
+    font-style: normal;
+    font-weight: 700;
+    margin-left: 0px;
+    line-height: normal;
+    margin-top: 2%;
+}
+
+.first-name1{
+    display:flex;
+    color: #FFF;
+    font-family: Arial;
+    font-size: clamp(0.5rem, 1vw, 1rem);
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-left: 10%;
+    margin-top: 4%;
+    margin-bottom: 1%;
+}
+
+.first-name{
+    display:flex;
+    color: #FFF;
+    font-family: Arial;
+    font-size: clamp(0.5rem, 1vw, 1rem);
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-left: 10%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+}
+
+
+.first-name-input:focus{
+    border-color: #00000000;
+}
+
+.first-name-input{
+    color: #ffffff;
+    font-family: Arial;
+    font-size: clamp(0.5rem, 1vw, 1rem);
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    caret-color: #ffffff; /* Color of the cursor */
+    display: flex;
+    border-radius: 10px;
+    background: rgba(36, 36, 36, 0.60);
+    margin-left: 10%;
+    margin-right:10%;
+    padding-left: 4%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    border: none;
+
+    margin-bottom: 1%;
+    margin-top: 0.5%;
+}
+
+.address-input{
+    color: rgba(255, 255, 255, 0.28);
+    font-family: Arial;
+    font-size: clamp(0.5rem, 1vw, 1rem);
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    caret-color: #ffffff; /* Color of the cursor */
+    display: flex;
+    border-radius: 10px;
+    background: rgba(36, 36, 36, 0.60);
+    margin-left: 10%;
+    margin-right:10%;
+    padding-left: 4%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    border: none;
+
+    margin-bottom: 5%;
+    margin-top: 0.5%;
+}
+
+.registration-button{
+    display: flex;
+    color: #000;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    font-family: Inter;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top:5%;
+    margin-bottom: 5%;
+    padding:2%;
+    font-size: clamp(0.5rem, 1vw, 1rem);
+    font-style: italic;
+    font-weight: 800;
+    line-height: normal;
+    text-align: center;
+    border-radius: 16px;
+    background: #FFF;
+    border: none;
+}
+
+.registration-button:hover{
+    background: #cfcfcf;
+    color: #000000;
+}
+
+.call-container{
+    display:flex;
+    flex-direction: row;
+    border-radius: 60px;
+    background: rgba(255, 255, 255, 0.80);
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top:5%;
+    margin-bottom: 5%;
+    align-items: center;
+    justify-content: center;
+    padding:2%;
+    height:3vh;
+}
+
+.cancel-button{
+    display: flex;
+    border-radius: 80px;
+    background: #EE1D06;
+    margin-right:10%;
+    padding:4%;
+    border:none;
+    width:20%;
+    height:3vh;
+
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    margin-right: 0px;
+}
+
+.cancel-button:hover{
+    background: #cc1201;
+}
+
+.call-button{
+    display: flex;
+    border-radius: 80px;
+    background: #67E3A9;
+    padding:4%;
+    border:none;
+    width:20%;
+    height:3vh;
+
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    margin-right:5%;
+}
+
+.call-button:hover{
+    background: #00c781;
+}
+
+.phone{
+    display:flex;
+    stroke-width: 1.5px;
+    stroke: #FFF;
+}
+
+.side-bar-text-container{
+    display:flex;
+    margin-top: 3vh;
+    flex-direction: column;
+    margin-bottom: 5vh;
+}
+
+.side-bar-text-title{
+    color: #FFF;
+    font-family: Arial;
+    font-size: clamp(1.2rem, 1vw, 6rem);
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 1vh;
+}
+
+.side-bar-text{
+    color: #FFF;
+    font-family:  Arial;
+    font-size: clamp(0.5rem, 1vw, 1rem);
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.right-item{
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    height: 100%;
+    padding-left: 0vw;
+    padding-top: 2vh;
+    padding-right: 8vw;
+}
+
+.bar {
+    display: flex; /* Align children horizontally */
+    justify-content: space-between; /* Push the texts to opposite ends */
+    align-items: center; /* Align items vertically in the center */
+    width: 60%; /* Make the bar responsive to screen size */
+    max-width: 1200px; /* Optional: Limit width for larger screens */
+    margin: 0 auto; /* Center the bar on the page */
+    padding: 10px 20px; /* Add padding for spacing */
+    border-radius: 24px; /* Rounded corners */
+    background: rgba(19, 19, 19, 0.44); /* Background styling */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.bar-text1,
+.bar-text2 {
+    font-size: clamp(0.8rem, 1vw, 1.2rem); /* Responsive font size */
+    color: #bcbcbc; /* Text color */
+    font-family: Arial, sans-serif; /* Font family */
+    font-weight: 600; /* Semi-bold text */
+    margin: 0; /* Remove any default margin */
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.bar-text1 {
+    text-align: left; /* Align text to the left */
+    margin-left: 10%;
+}
+
+.bar-text2 {
+    text-align: right; /* Align text to the right */
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+.bar-text1:hover{
+    color: #FFF;
+}
+
+.bar-text2:hover{
+    color: #FFF;
+}
+
+.slogan{
+    font-family: Inter;
+    font-size: clamp(0.5rem, 5vw, 10rem);
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    background: linear-gradient(0deg, #FFF 0%, #FFF 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    margin-top: 3vh;
+    margin-bottom: 5vh;
+}
+
+.p1-title{
+    color: #FFF;
+    font-family: "Archivo Black"'sans-serif';
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 1vh;
+}
+
+.p1-text{
+    color: #C4C4C4;
+    font-family: Arial;
+    font-size: clamp(0.5rem, 1vw, 1rem);
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.bold{
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.diagram{
+    display: flex;
+    width: 100%;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
+}
+
+.copy-right-container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+.line2{
+    display: flex;
+    width: 40%;
+    margin-top: 3vh;
+    margin-bottom: 1vh;
+}
+
+.copyright{
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: clamp(0.5rem, 1vw, 1rem);
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
